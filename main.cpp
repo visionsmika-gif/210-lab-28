@@ -100,8 +100,8 @@ int main() {
                 cout << "Displaying goat data.\n";
                 display_trip(trip);
                 break;
-            case 4:
-                cout << "Sorting goats.\n";
+            case 4: // [4] Remove consecutive goats whose name starts with the same letter
+                cout << "Removing goats.\n";
                 sort_trip(trip);
                 break;
             default:
