@@ -51,7 +51,7 @@ int main_menu();
 
 void sort_trip(list<Goat>& trip) {
     trip.sort();
-    cout << "Goats sorted successfully! New trip:\n";
+    trip.erase(unique(trip.begin(), trip.end(), [](const Goat& a, const Goat& b) { return a.get_name()[0] == b.get_name()[0]; }), trip.end());
     display_trip(trip);
 }
 
@@ -122,7 +122,7 @@ int main_menu() {
     cout << "[3] List goats\n";
 
     // Main menu has been expanded to include 8 new options that feature different STL algorithms.
-    cout << "[4] Sort goats and remove duplicates\n";
+    cout << "[4] Remove consecutive goats whose name starts with the same letter\n";
 
     cout << "[5] Quit\n";
 
