@@ -1,3 +1,15 @@
+/*
+INSTRUCTIONS:
+
+Lab 24 provided basic functionality to the list of Goat objects: add, delete.
+
+Now we know quite a bit more about STL algorithms and how to implement them on associative containers such as the std::list.
+
+Expand the main menu of this program by adding 8 more options that feature different STL algorithms. Each of the 8 additions
+should be its own milestone for a total of 8 milestones. Your code should run at each milestone and clearly demonstrate or
+exercise what you just coded in that milestone.
+*/
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
