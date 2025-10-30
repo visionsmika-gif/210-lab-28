@@ -13,7 +13,10 @@ exercise what you just coded in that milestone.
 /*
 New STL algorithms to implement:
 
-1 - Sort: Overload the < operator according to the goat's names.
+Not an STL algorithm (list member function):
+0 - Sort: Overload the < operator according to the goat's names.
+
+1 - Unique: Remove duplicates (assuming sorted)
 
 2 - Reverse: Reverse the order of all goats.
 
@@ -46,10 +49,11 @@ void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
 
-/*
 void sort_trip(list<Goat>& trip) {
-    sort(trip.begin(), trip.end());
-}*/
+    trip.sort();
+    cout << "Goats sorted successfully! New trip:\n";
+    display_trip(trip);
+}
 
 int main() {
     srand(time(0));
@@ -98,7 +102,7 @@ int main() {
                 break;
             case 4:
                 cout << "Sorting goats.\n";
-                //sort_trip(trip);
+                sort_trip(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -118,7 +122,7 @@ int main_menu() {
     cout << "[3] List goats\n";
 
     // Main menu has been expanded to include 8 new options that feature different STL algorithms.
-    cout << "[4] Sort goats\n";
+    cout << "[4] Sort goats and remove duplicates\n";
 
     cout << "[5] Quit\n";
 
