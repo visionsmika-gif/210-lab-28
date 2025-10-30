@@ -53,12 +53,14 @@ void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
 
-void sort_trip(list<Goat>& trip) {
+// std::unique
+void unique_letter_names(list<Goat>& trip) {
     trip.sort();
     trip.erase(unique(trip.begin(), trip.end(), [](const Goat& a, const Goat& b) { return a.get_name()[0] == b.get_name()[0]; }), trip.end());
     display_trip(trip);
 }
 
+// std::find_if
 void find_goat(const list<Goat>& trip) {
     string name;
     cout << "Enter a name to find --> ";
@@ -67,8 +69,14 @@ void find_goat(const list<Goat>& trip) {
     auto it = find_if(trip.begin(), trip.end(), [name](const Goat& g) { return g.get_name() == name; });
 
     if (it != trip.end()) {
-        cout << "Found " << name << "'s data.\n";
-
+        cout << "Found " << name << "'s data:\n";
+        cout << "\t"
+            << name
+            << " (" << it->get_age()
+            << ", " << it->get_color() << ")\n";
+    }
+    else {
+        cout << name << " not found.\n";
     }
 }
 
@@ -103,7 +111,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 5) {
+    while (sel != 6) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -119,7 +127,11 @@ int main() {
                 break;
             case 4: // [4] Remove consecutive goats whose name starts with the same letter
                 cout << "Removing goats.\n";
-                sort_trip(trip);
+                unique_letter_names(trip);
+                break;
+            case 5:
+                cout << "Finding a goat.\n";
+                find_goat(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -140,13 +152,14 @@ int main_menu() {
 
     // Main menu has been expanded to include 8 new options that feature different STL algorithms.
     cout << "[4] Remove consecutive goats whose name starts with the same letter\n";
+    cout << "[5] Find a goat.\n";
 
-    cout << "[5] Quit\n";
+    cout << "[6] Quit\n";
 
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 4) {
+    while (choice < 1 || choice > 6) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
