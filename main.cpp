@@ -11,16 +11,20 @@ exercise what you just coded in that milestone.
 */
 
 /*
-New STL algorithms to implement:
 
 Not an STL algorithm (list member function):
 0 - Sort: Overload the < operator according to the goat's names.
 
-1 - Unique: Remove duplicates (assuming sorted)
-
 2 - Reverse: Reverse the order of all goats.
 
 3 - Shuffle: Shuffle all goats.
+
+
+New STL algorithms to implement:
+
+1 - Unique: Remove duplicates (assuming sorted)
+
+
 
 4 - Find_if: Find a goat according to a condition, like their name.
 
@@ -53,6 +57,19 @@ void sort_trip(list<Goat>& trip) {
     trip.sort();
     trip.erase(unique(trip.begin(), trip.end(), [](const Goat& a, const Goat& b) { return a.get_name()[0] == b.get_name()[0]; }), trip.end());
     display_trip(trip);
+}
+
+void find_goat(const list<Goat>& trip) {
+    string name;
+    cout << "Enter a name to find --> ";
+    cin >> name;
+
+    auto it = find_if(trip.begin(), trip.end(), [name](const Goat& g) { return g.get_name() == name; });
+
+    if (it != trip.end()) {
+        cout << "Found " << name << "'s data.\n";
+
+    }
 }
 
 int main() {
