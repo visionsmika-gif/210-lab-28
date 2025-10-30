@@ -10,11 +10,32 @@ should be its own milestone for a total of 8 milestones. Your code should run at
 exercise what you just coded in that milestone.
 */
 
+/*
+New STL algorithms to implement:
+
+1 - Sort: Overload the < operator according to the goat's names.
+
+2 - Reverse: Reverse the order of all goats.
+
+3 - Shuffle: Shuffle all goats.
+
+4 - Find_if: Find a goat according to a condition, like their name.
+
+5 - Transform: Age all goats by 1.
+
+6 - Accumulate: Calculate the total age of every goat.
+
+7 - Any_of: Check if any of the goats have a certain color.
+
+8 - Clear: Empty the goat container.
+*/
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <list>
 #include "Goat.h"
+#include <algorithm>
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
@@ -24,6 +45,11 @@ void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
+
+/*
+void sort_trip(list<Goat>& trip) {
+    sort(trip.begin(), trip.end());
+}*/
 
 int main() {
     srand(time(0));
@@ -56,7 +82,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 4) {
+    while (sel != 5) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -69,6 +95,10 @@ int main() {
             case 3:    
                 cout << "Displaying goat data.\n";
                 display_trip(trip);
+                break;
+            case 4:
+                cout << "Sorting goats.\n";
+                //sort_trip(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -86,7 +116,12 @@ int main_menu() {
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
-    cout << "[4] Quit\n";
+
+    // Main menu has been expanded to include 8 new options that feature different STL algorithms.
+    cout << "[4] Sort goats\n";
+
+    cout << "[5] Quit\n";
+
     cout << "Choice --> ";
     int choice;
     cin >> choice;
