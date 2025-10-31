@@ -1,14 +1,5 @@
-/*
-INSTRUCTIONS:
-
-Lab 24 provided basic functionality to the list of Goat objects: add, delete.
-
-Now we know quite a bit more about STL algorithms and how to implement them on associative containers such as the std::list.
-
-Expand the main menu of this program by adding 8 more options that feature different STL algorithms. Each of the 8 additions
-should be its own milestone for a total of 8 milestones. Your code should run at each milestone and clearly demonstrate or
-exercise what you just coded in that milestone.
-*/
+// COMSC-210 | Lab 28 | Mika Aquino
+// IDE used: Visual Studio 2022
 
 #include <iostream>
 #include <fstream>
@@ -17,7 +8,6 @@ exercise what you just coded in that milestone.
 #include "Goat.h"
 #include <algorithm>
 #include <numeric>
-#include <random>
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
@@ -137,7 +127,7 @@ int main_menu() {
     // Main menu has been expanded to include 8 new options that feature different STL algorithms.
     cout << "[4] Reverse goats\n";
     cout << "[5] Find a goat by name\n";
-    cout << "[6] Remove consecutive goats whose name starts with the same letter\n";
+    cout << "[6] Sort and de-duplicate goats\n";
     cout << "[7] Calculate the total age of all goats\n";
     cout << "[8] Age up all goats\n";
     cout << "[9] Check if any goats have a certain color\n";
@@ -208,7 +198,13 @@ int select_goat(list<Goat> trp) {
     return input;
 }
 
-// std::reverse
+/*
+Functions for new menu options that feature different STL algorithms:
+*/
+
+// Function to reverse the trip.
+// args:    a list of goats
+// returns: void
 void reverse_trip(list<Goat>& trip) {
     reverse(trip.begin(), trip.end());
 
@@ -216,7 +212,9 @@ void reverse_trip(list<Goat>& trip) {
     display_trip(trip);
 }
 
-// std::find_if
+// Function to find a goat by name.
+// args:    a list of goats
+// returns: void
 void find_goat(const list<Goat>& trip) {
     string name;
     cout << "Enter a name to find --> ";
@@ -236,7 +234,9 @@ void find_goat(const list<Goat>& trip) {
     }
 }
 
-// std::unique
+// Function to sort the trip and ensure all goats have a unique initial.
+// args:    a list of goats
+// returns: void
 void unique_letter_names(list<Goat>& trip) {
     trip.sort();
     trip.erase(unique(trip.begin(), trip.end(), [](const Goat& a, const Goat& b) { return a.get_name()[0] == b.get_name()[0]; }), trip.end());
@@ -245,13 +245,17 @@ void unique_letter_names(list<Goat>& trip) {
     display_trip(trip);
 }
 
-// std::accumulate
+// Function to calculate and output the total age of all goats in the trip.
+// args:    a list of goats
+// returns: void
 void total_age(const list<Goat>& trip) {
     int totalAge = accumulate(trip.begin(), trip.end(), 0, [](int sum, const Goat& g) { return sum + g.get_age(); });
     cout << "Total age of all goats: " << totalAge << "\n";
 }
 
-// std::transform
+// Function to age up all goats in the trip by 1 year.
+// args:    a list of goats
+// returns: void
 void age_goats(list<Goat>& trip) {
     transform(trip.begin(), trip.end(), trip.begin(), [](Goat& g) {g.set_age(g.get_age() + 1); return g; });
 
@@ -259,7 +263,9 @@ void age_goats(list<Goat>& trip) {
     display_trip(trip);
 }
 
-// std:: any_of
+// Function to print T/F based on whether a color exists within the trip.
+// args:    a list of goats
+// returns: void
 void find_color(const list<Goat>& trip) {
     string color;
     cout << "Enter a color (case sensitive) --> ";
@@ -275,7 +281,9 @@ void find_color(const list<Goat>& trip) {
     }
 }
 
-// std::for_each
+// Function to recolor all goats in the trip to a single color chosen by the user.
+// args:    a list of goats
+// returns: void
 void paint_trip(list <Goat>& trip) {
     string color;
     cout << "Enter a color to paint all goats --> ";
@@ -288,7 +296,9 @@ void paint_trip(list <Goat>& trip) {
 
 }
 
-// std::clear
+// Function to clear the trip.
+// args:    a list of goats
+// returns: void
 void clear_trip(list<Goat>& trip) {
     trip.clear();
 }
