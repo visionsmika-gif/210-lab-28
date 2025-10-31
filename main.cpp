@@ -38,6 +38,7 @@ New STL algorithms to implement:
 #include "Goat.h"
 #include <algorithm>
 #include <numeric>
+#include <random>
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
@@ -112,11 +113,21 @@ void clear_trip(list<Goat>& trip) {
     trip.clear();
 }
 
+// std::transform
 void age_goats(list<Goat>& trip) {
     transform(trip.begin(), trip.end(), trip.begin(), [](Goat& g) {g.set_age(g.get_age() + 1); return g; });
     
     cout << "New trip:\n";
     display_trip(trip);
+}
+
+// std::shuffle
+void shuffle_trip(list <Goat>& trip) {
+    shuffle(trip.begin(), trip.end(), default_random_engine());
+
+    cout << "New trip:\n";
+    display_trip(trip);
+
 }
 
 int main() {
@@ -150,7 +161,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 11) {
+    while (sel != 12) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -192,6 +203,10 @@ int main() {
                 cout << "Aging all goats by 1.\n";
                 age_goats(trip);
                 break;
+            case 11:
+                cout << "Shuffling goats.\n";
+                shuffle_trip(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -217,13 +232,14 @@ int main_menu() {
     cout << "[8] Check if any goats have a certain color\n";
     cout << "[9] Clear all goats\n";
     cout << "[10] Age all goats by 1\n";
+    cout << "[11] Shuffle goats.\n";
 
-    cout << "[11] Quit\n";
+    cout << "[12] Quit\n";
 
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 11) {
+    while (choice < 1 || choice > 12) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
