@@ -96,6 +96,7 @@ void total_age(const list<Goat>& trip) {
     cout << "Total age of all goats: " << totalAge << "\n";
 }
 
+// std:: any_of
 void find_color(const list<Goat>& trip) {
     string color;
     cout << "Enter a color (case sensitive) --> ";
@@ -104,7 +105,7 @@ void find_color(const list<Goat>& trip) {
     bool hasColor = any_of(trip.begin(), trip.end(), [color](const Goat& g) { return g.get_color() == color; });
 
     if (hasColor) {
-        cout << "Found a goat with the color '" << color << ".'\n";
+        cout << "A goat with the color '" << color << "' exists.\n";
     }
     else {
         cout << "No goats have the color '" << color << ".'\n";
