@@ -96,6 +96,21 @@ void total_age(const list<Goat>& trip) {
     cout << "Total age of all goats: " << totalAge << "\n";
 }
 
+void find_color(const list<Goat>& trip) {
+    string color;
+    cout << "Enter a color (case sensitive) --> ";
+    cin >> color;
+
+    bool hasColor = any_of(trip.begin(), trip.end(), [color](const Goat& g) { return g.get_color() == color; });
+
+    if (hasColor) {
+        cout << "Found a goat with the color '" << color << ".'\n";
+    }
+    else {
+        cout << "No goats have the color '" << color << ".'\n";
+    }
+}
+
 int main() {
     srand(time(0));
     bool again;
@@ -127,7 +142,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 8) {
+    while (sel != 9) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -157,6 +172,10 @@ int main() {
                 cout << "Calculating total age.\n";
                 total_age(trip);
                 break;
+            case 8:
+                cout << "Checking for the existence of a color.\n";
+                find_color(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -179,13 +198,14 @@ int main_menu() {
     cout << "[5] Find a goat\n";
     cout << "[6] Reverse goats\n";
     cout << "[7] Calculate total age of all goats\n";
+    cout << "[8] Check if any goats have a certain color\n";
 
-    cout << "[8] Quit\n";
+    cout << "[9] Quit\n";
 
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 8) {
+    while (choice < 1 || choice > 9) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
