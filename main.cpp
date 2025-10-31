@@ -12,11 +12,6 @@ exercise what you just coded in that milestone.
 
 /*
 
-Not an STL algorithm (list member function):
-0 - Sort: Overload the < operator according to the goat's names.
-
-
-
 New STL algorithms to implement:
 
 1 - Unique: Remove duplicates (assuming sorted)
@@ -112,8 +107,16 @@ void find_color(const list<Goat>& trip) {
     }
 }
 
+// std::clear
 void clear_trip(list<Goat>& trip) {
     trip.clear();
+}
+
+void age_goats(list<Goat>& trip) {
+    transform(trip.begin(), trip.end(), trip.begin(), [](Goat& g) {g.set_age(g.get_age() + 1); return g; });
+    
+    cout << "New trip:\n";
+    display_trip(trip);
 }
 
 int main() {
@@ -147,7 +150,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 10) {
+    while (sel != 11) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -185,6 +188,10 @@ int main() {
                 cout << "Clearing all goats.\n";
                 clear_trip(trip);
                 break;
+            case 10:
+                cout << "Aging all goats by 1.\n";
+                age_goats(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -209,13 +216,14 @@ int main_menu() {
     cout << "[7] Calculate total age of all goats\n";
     cout << "[8] Check if any goats have a certain color\n";
     cout << "[9] Clear all goats\n";
+    cout << "[10] Age all goats by 1\n";
 
-    cout << "[10] Quit\n";
+    cout << "[11] Quit\n";
 
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 10) {
+    while (choice < 1 || choice > 11) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
