@@ -15,16 +15,13 @@ exercise what you just coded in that milestone.
 Not an STL algorithm (list member function):
 0 - Sort: Overload the < operator according to the goat's names.
 
-2 - Reverse: Reverse the order of all goats.
-
-3 - Shuffle: Shuffle all goats.
 
 
 New STL algorithms to implement:
 
 1 - Unique: Remove duplicates (assuming sorted)
 
-
+2 - Reverse: Reverse the order of all goats.
 
 4 - Find_if: Find a goat according to a condition, like their name.
 
@@ -35,6 +32,8 @@ New STL algorithms to implement:
 7 - Any_of: Check if any of the goats have a certain color.
 
 8 - Clear: Empty the goat container.
+
+3 - Shuffle: Shuffle all goats.
 */
 
 #include <iostream>
@@ -57,6 +56,8 @@ int main_menu();
 void unique_letter_names(list<Goat>& trip) {
     trip.sort();
     trip.erase(unique(trip.begin(), trip.end(), [](const Goat& a, const Goat& b) { return a.get_name()[0] == b.get_name()[0]; }), trip.end());
+
+    cout << "New trip:\n";
     display_trip(trip);
 }
 
@@ -78,6 +79,14 @@ void find_goat(const list<Goat>& trip) {
     else {
         cout << name << " not found.\n";
     }
+}
+
+// std::reverse
+void reverse_trip(list<Goat>& trip) {
+    reverse(trip.begin(), trip.end());
+
+    cout << "New trip:\n";
+    display_trip(trip);
 }
 
 int main() {
@@ -111,7 +120,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 6) {
+    while (sel != 7) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -133,6 +142,10 @@ int main() {
                 cout << "Finding a goat.\n";
                 find_goat(trip);
                 break;
+            case 6:
+                cout << "Reversing goats.\n";
+                reverse_trip(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -152,14 +165,15 @@ int main_menu() {
 
     // Main menu has been expanded to include 8 new options that feature different STL algorithms.
     cout << "[4] Remove consecutive goats whose name starts with the same letter\n";
-    cout << "[5] Find a goat.\n";
+    cout << "[5] Find a goat\n";
+    cout << "[6] Reverse goats\n";
 
-    cout << "[6] Quit\n";
+    cout << "[7] Quit\n";
 
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 6) {
+    while (choice < 1 || choice > 7) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
