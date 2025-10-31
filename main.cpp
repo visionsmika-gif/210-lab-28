@@ -121,9 +121,13 @@ void age_goats(list<Goat>& trip) {
     display_trip(trip);
 }
 
-// std::shuffle
-void shuffle_trip(list <Goat>& trip) {
-    shuffle(trip.begin(), trip.end(), default_random_engine());
+// std::for_each
+void paint_trip(list <Goat>& trip) {
+    string color;
+    cout << "Enter a color to paint all goats --> ";
+    cin >> color;
+
+    for_each(trip.begin(), trip.end(), [color](Goat& g) {g.set_color(color);});
 
     cout << "New trip:\n";
     display_trip(trip);
@@ -176,36 +180,36 @@ int main() {
                 display_trip(trip);
                 break;
             case 4: // [4] Remove consecutive goats whose name starts with the same letter
-                cout << "Removing goats.\n";
-                unique_letter_names(trip);
+                cout << "Reversing goats.\n";
+                reverse_trip(trip);
                 break;
             case 5:
                 cout << "Finding a goat.\n";
                 find_goat(trip);
                 break;
             case 6:
-                cout << "Reversing goats.\n";
-                reverse_trip(trip);
+                cout << "Removing goats.\n";
+                unique_letter_names(trip);
                 break;
             case 7:
                 cout << "Calculating total age.\n";
                 total_age(trip);
                 break;
             case 8:
-                cout << "Checking for the existence of a color.\n";
-                find_color(trip);
-                break;
-            case 9:
-                cout << "Clearing all goats.\n";
-                clear_trip(trip);
-                break;
-            case 10:
                 cout << "Aging all goats by 1.\n";
                 age_goats(trip);
                 break;
+            case 9:
+                cout << "Checking for the existence of a color.\n";
+                find_color(trip);
+                break;
+            case 10:
+                cout << "Painting goats.\n";
+                paint_trip(trip);
+                break;
             case 11:
-                cout << "Shuffling goats.\n";
-                shuffle_trip(trip);
+                cout << "Clearing all goats.\n";
+                clear_trip(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -225,14 +229,14 @@ int main_menu() {
     cout << "[3] List goats\n";
 
     // Main menu has been expanded to include 8 new options that feature different STL algorithms.
-    cout << "[4] Remove consecutive goats whose name starts with the same letter\n";
-    cout << "[5] Find a goat\n";
-    cout << "[6] Reverse goats\n";
-    cout << "[7] Calculate total age of all goats\n";
-    cout << "[8] Check if any goats have a certain color\n";
-    cout << "[9] Clear all goats\n";
-    cout << "[10] Age all goats by 1\n";
-    cout << "[11] Shuffle goats.\n";
+    cout << "[4] Reverse goats\n";
+    cout << "[5] Find a goat by name\n";
+    cout << "[6] Remove consecutive goats whose name starts with the same letter\n";
+    cout << "[7] Calculate the total age of all goats\n";
+    cout << "[8] Age up all goats\n";
+    cout << "[9] Check if any goats have a certain color\n";
+    cout << "[10] Paint all goats a certain color\n";
+    cout << "[11] Clear all goats\n";
 
     cout << "[12] Quit\n";
 
