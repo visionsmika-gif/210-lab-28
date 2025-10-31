@@ -112,6 +112,10 @@ void find_color(const list<Goat>& trip) {
     }
 }
 
+void clear_trip(list<Goat>& trip) {
+    trip.clear();
+}
+
 int main() {
     srand(time(0));
     bool again;
@@ -143,7 +147,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 9) {
+    while (sel != 10) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -177,6 +181,10 @@ int main() {
                 cout << "Checking for the existence of a color.\n";
                 find_color(trip);
                 break;
+            case 9:
+                cout << "Clearing all goats.\n";
+                clear_trip(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -200,13 +208,14 @@ int main_menu() {
     cout << "[6] Reverse goats\n";
     cout << "[7] Calculate total age of all goats\n";
     cout << "[8] Check if any goats have a certain color\n";
+    cout << "[9] Clear all goats\n";
 
-    cout << "[9] Quit\n";
+    cout << "[10] Quit\n";
 
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 9) {
+    while (choice < 1 || choice > 10) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -214,6 +223,11 @@ int main_menu() {
 }
 
 void delete_goat(list<Goat> &trip) {
+    if (trip.empty()) {
+        cout << "Trip is empty. No goats deleted.\n";
+        return;
+    }
+
     cout << "DELETE A GOAT\n";
     int index = select_goat(trip);
     auto it = trip.begin();
@@ -233,6 +247,11 @@ void add_goat(list<Goat> &trip, string nms[], string cls[]) {
 }
 
 void display_trip(list<Goat> trp) {
+    if (trp.empty()) {
+        cout << "Trip is empty.\n";
+        return;
+    }
+
     int i = 1;
     for (auto gt: trp)
         cout << "\t" 
