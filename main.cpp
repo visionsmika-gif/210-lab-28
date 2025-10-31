@@ -83,8 +83,8 @@ int main() {
                 cout << "Finding a goat.\n";
                 find_goat(trip);
                 break;
-            case 6:     // [6] Remove consecutive goats whose name starts with the same letter
-                cout << "Removing goats.\n";
+            case 6:     // [6] Sort and remove goats with the same initial
+                cout << "Sorting and removing goats.\n";
                 unique_letter_names(trip);
                 break;
             case 7:     // [7] Calculate the total age of all goats
@@ -114,7 +114,6 @@ int main() {
         sel = main_menu();
     }
     
-
     return 0;
 }
 
@@ -127,7 +126,7 @@ int main_menu() {
     // Main menu has been expanded to include 8 new options that feature different STL algorithms.
     cout << "[4] Reverse goats\n";
     cout << "[5] Find a goat by name\n";
-    cout << "[6] Sort and de-duplicate goats\n";
+    cout << "[6] Sort and remove goats with the same initial\n";
     cout << "[7] Calculate the total age of all goats\n";
     cout << "[8] Age up all goats\n";
     cout << "[9] Check if any goats have a certain color\n";
