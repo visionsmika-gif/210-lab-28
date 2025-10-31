@@ -42,6 +42,7 @@ New STL algorithms to implement:
 #include <list>
 #include "Goat.h"
 #include <algorithm>
+#include <numeric>
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
@@ -89,6 +90,12 @@ void reverse_trip(list<Goat>& trip) {
     display_trip(trip);
 }
 
+// std::accumulate
+void total_age(const list<Goat>& trip) {
+    int totalAge = accumulate(trip.begin(), trip.end(), 0, [](int sum, const Goat& g) { return sum + g.get_age(); });
+    cout << "Total age of all goats: " << totalAge << "\n";
+}
+
 int main() {
     srand(time(0));
     bool again;
@@ -120,7 +127,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 7) {
+    while (sel != 8) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -146,6 +153,10 @@ int main() {
                 cout << "Reversing goats.\n";
                 reverse_trip(trip);
                 break;
+            case 7:
+                cout << "Calculating total age.\n";
+                total_age(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -167,13 +178,14 @@ int main_menu() {
     cout << "[4] Remove consecutive goats whose name starts with the same letter\n";
     cout << "[5] Find a goat\n";
     cout << "[6] Reverse goats\n";
+    cout << "[7] Calculate total age of all goats\n";
 
-    cout << "[7] Quit\n";
+    cout << "[8] Quit\n";
 
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 7) {
+    while (choice < 1 || choice > 8) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
